@@ -1,3 +1,9 @@
+<?php
+
+require "../config/database.php" /* traemos la configuracion de donde esta la base de datos */
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,9 +41,17 @@
             </tr>
         </thead>
 
+        <tbody>
+
+        </tbody>
         </table>
 
     </div>
+    
+    <?php
+    $sqlGenero = "SELECT id, nombre FROM genero"; /* se hace una consulta que trae el nombre de la tabla y trae todos */
+    $generos = $conn->query($sqlGenero); /* funcion de mysql */ /* traemos el estado de la tabla genero  */
+    ?>
     <?php include "nuevoModal.php"; ?> <!-- incluimos el archivo que tiene el modal -->
 <script src="../../assets/js/bootstrap.bundle.min.js" ></script>
 </body>
