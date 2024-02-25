@@ -11,30 +11,20 @@
 
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre:</label>
-                <input type="text" name="id" id="nombre" class="form-control" required>
+                <input type="text" name="nombre" id="nombre" class="form-control" required>
             </div>
             <div class="mb-3">
-                <label for="nombre" class="form-label">Descripcion:</label>
-                <textarea  name="descripcion" id="descripcion" class="form-control" rows="3" required></textarea>
+                <label for="descripcion" class="form-label">Descripcion:</label>
+                <textarea name="descripcion" id="descripcion" class="form-control" rows="3" required></textarea>
             </div>
             <div class="mb-3">
                 <label for="genero" class="form-label">Género:</label>
-                <select name="genero" id="genero" class="form-select" required>
+                <select name="genero" id="genero" class="form-select" style="cursor: pointer;" required>
                     <option value="">Seleccionar...</option>
                     <?php while ($row_genero = $generos->fetch_assoc()) { ?>
                       <option value="<?php echo $row_genero["id"]; ?>"><?= $row_genero["nombre"]?> </option>
                     <?php }?> 
                 </select>
-            </div>
-
-            <div class="mb-3">
-                        <label for="genero" class="form-label">Género:</label>
-                        <select name="genero" id="genero" class="form-select" required>
-                            <option value="">Seleccionar...</option>
-                            <?php while ($row_genero = $generos->fetch_assoc()) { ?>
-                                <option value="<?php echo $row_genero["id"]; ?>"><?= $row_genero["nombre"] ?></option>
-                            <?php } ?>
-                        </select>
             </div>
 
             <div class="mb-3">
