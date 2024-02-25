@@ -18,11 +18,25 @@
                 <textarea  name="descripcion" id="descripcion" class="form-control" rows="3" required></textarea>
             </div>
             <div class="mb-3">
-                <label for="nombre" class="form-label">Género:</label>
+                <label for="genero" class="form-label">Género:</label>
                 <select name="genero" id="genero" class="form-select" required>
                     <option value="">Seleccionar...</option>
+                    <?php while ($row_genero = $generos->fetch_assoc()) { ?>
+                      <option value="<?php echo $row_genero["id"]; ?>"><?= $row_genero["nombre"]?> </option>
+                    <?php }?> 
                 </select>
             </div>
+
+            <div class="mb-3">
+                        <label for="genero" class="form-label">Género:</label>
+                        <select name="genero" id="genero" class="form-select" required>
+                            <option value="">Seleccionar...</option>
+                            <?php while ($row_genero = $generos->fetch_assoc()) { ?>
+                                <option value="<?php echo $row_genero["id"]; ?>"><?= $row_genero["nombre"] ?></option>
+                            <?php } ?>
+                        </select>
+            </div>
+
             <div class="mb-3">
                 <label for="poster" class="form-label">Poster:</label>
                 <input type="file" name="poster" id="poster" class="form-control" >

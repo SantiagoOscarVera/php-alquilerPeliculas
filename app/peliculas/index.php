@@ -41,9 +41,9 @@ require "../config/database.php" /* traemos la configuracion de donde esta la ba
             </tr>
         </thead>
 
-        <tbody>
+            <tbody>
 
-        </tbody>
+            </tbody>
         </table>
 
     </div>
