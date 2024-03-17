@@ -1,7 +1,11 @@
 <?php
 
-require "../config/database.php" /* traemos la configuracion de donde esta la base de datos */
+require "../config/database.php"; /* traemos la configuracion de donde esta la base de datos */
 
+$sqlPeliculas = "SELECT p.id, p.nombre, p.descripcion, g.nombre AS genero FROM pelicula AS p /* consulta sql*/ /* p es de la columna peliculas y g de genero */
+INNER JOIN genero AS g ON p.id_genero=g.id"; /* el genero de las peliculas se relacionan con la tabla genero y su id */
+$peliculas = $conn->query($sqlPeliculas) /* ejecutamos la consulta */ /* $conn->query es la conexion */
+/* abajo en la seccion de tablas renderizamos las filas */
 ?>
 
 <!DOCTYPE html>
@@ -41,10 +45,19 @@ require "../config/database.php" /* traemos la configuracion de donde esta la ba
             </tr>
         </thead>
 
-            <tbody>
-
-            </tbody>
-        </table>
+        <tbody>
+            <?php while ($row_peliculas = $peliculas->fetch_assoc()) { ?>
+                <tr>
+                    <td><?= $row_peliculas['id']; ?></td>
+                    <td><?= $row_peliculas['nombre']; ?></td>
+                    <td><?= $row_peliculas['descripcion']; ?></td>
+                    <td><?= $row_peliculas['genero']; ?></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
 
     </div>
     
