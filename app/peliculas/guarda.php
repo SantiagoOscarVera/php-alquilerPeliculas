@@ -2,7 +2,7 @@
 
 require "../config/database.php"; /* importamos la conexion de la base de datos, obtenemos los datos de esta ruta */
 
-$nombre = $conn->real_escape_string($_POST['nombre']); /* obtenemos los valores y hacemos una insercion a la base de datos */
+$nombre = $conn->real_escape_string($_POST['nombre']);  /*Con esto hacemos una limpieza .obtenemos los valores y hacemos una insercion a la base de datos */
 $descripcion = $conn->real_escape_string($_POST['descripcion']);
 $genero = $conn->real_escape_string($_POST['genero']);
 
