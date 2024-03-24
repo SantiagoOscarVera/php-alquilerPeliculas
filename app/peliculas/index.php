@@ -92,22 +92,22 @@ $peliculas = $conn->query($sqlPeliculas) /* ejecutamos la consulta */ /* $conn->
 
             /* hacemos una consulta a la base de datos con AJAX, para que me retorne la info que quiero solicitar*/
 
-            let url = "getPelicula.php"   /* creamos una ruta */
+            let url = "getPelicula.php"   /* creamos una ruta a la cual vamos a hacer la peticion */
             let formData = new FormData() /* con esto pasamos los datos */
             formData.append('id', id) /* con esto agregamos los elementos que necesitamos enviar */ /* identificamos y le mandamos la variable */
 
-            fetch(url, { /* consulta AJAX */
-                method: "POST",
-                body: formData
-            }).then(response => response.json())
-            .then(data => {
+            fetch(url, { /* consulta AJAX */ /* enviamos la url */
+                method: "POST", /* metodo */
+                body: formData /* enviamos la informacion */
+            }).then(response => response.json()) /* el response sea un .json */
+            .then(data => { /* lo q nos arroje este en una variable que se llame "data" */
 
-                inputId.value = data.id
+                inputId.value = data.id /* los datos de mi registro van a tener cada unos de estos registros */
                 inputNombre.value = data.nombre
                 inputDescripcion.value = data.descripcion
                 inputGenero.value = data.genero
 
-                }).catch(err => console.log(err))
+                }).catch(err => console.log(err)) /* manejamos los errores */
         }
 
         )
