@@ -74,6 +74,9 @@ $peliculas = $conn->query($sqlPeliculas) /* ejecutamos la consulta */ /* $conn->
     ?>
 
     <?php include "nuevoModal.php"; ?> <!-- incluimos el archivo que tiene el modal -->
+
+    <?php $generos-> data_seek(0);?> <!-- con esto reiniciamos la variable en la posicion 0 y con editar podemos recorrerlo de nuevo -->
+
     <?php include "editaModal.php"; ?>
 
     <script> /* javaScript */
@@ -105,7 +108,7 @@ $peliculas = $conn->query($sqlPeliculas) /* ejecutamos la consulta */ /* $conn->
                 inputId.value = data.id /* los datos de mi registro van a tener cada unos de estos registros */
                 inputNombre.value = data.nombre
                 inputDescripcion.value = data.descripcion
-                inputGenero.value = data.genero
+                inputGenero.value = data.id_genero
 
                 }).catch(err => console.log(err)) /* manejamos los errores */
         }

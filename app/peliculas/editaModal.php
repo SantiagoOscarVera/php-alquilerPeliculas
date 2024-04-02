@@ -7,7 +7,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="guarda.php" method="post" enctype="multipart/form-data">
+        <form action="actualiza.php" method="post" enctype="multipart/form-data">
 
             <input type="hidden" id="id" name="id"> <!-- hidden significa que no tiene ningun valor,  para poder editar, va hacia el query selector del index -->
 
