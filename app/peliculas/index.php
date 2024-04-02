@@ -4,7 +4,7 @@ require "../config/database.php"; /* traemos la configuracion de donde esta la b
 
 $sqlPeliculas = "SELECT p.id, p.nombre, p.descripcion, g.nombre AS genero FROM pelicula AS p /* consulta sql*/ /* p es de la columna peliculas y g de genero */
 INNER JOIN genero AS g ON p.id_genero=g.id"; /* el genero de las peliculas se relacionan con la tabla genero y su id */
-$peliculas = $conn->query($sqlPeliculas) /* ejecutamos la consulta */ /* $conn->query es la conexion */
+$peliculas = $conn->query($sqlPeliculas); /* ejecutamos la consulta */ /* $conn->query es la conexion */
 /* abajo en la seccion de tablas renderizamos las filas */
 ?>
 
@@ -54,7 +54,7 @@ $peliculas = $conn->query($sqlPeliculas) /* ejecutamos la consulta */ /* $conn->
                     <td><?= $row_peliculas['genero']; ?></td>
                     <td></td>
                     <td>
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#editaModal" data-bs-id="<?= $row_pelicula['id']; ?>" class="btn btn-sm btn-warning"><svg style="width: 13px;padding-bottom: 4px;" viewBox="0 0 512 512"><path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z"/></svg>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#editaModal" data-bs-id="<?= $row_peliculas['id']; ?>" class="btn btn-sm btn-warning"><svg style="width: 13px;padding-bottom: 4px;" viewBox="0 0 512 512"><path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z"/></svg>
                         Editar <!-- data-bs-toggle="modal" data-bs-target="#editaModal" esta seccion nos trae el modal, abajo complementamos con la linea del archivo -->
                         </a>
                         <a href="#" class="btn btn-sm btn-danger"><svg style="width: 13px;padding-bottom: 4px;" viewBox="0 0 448 512"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
@@ -82,6 +82,14 @@ $peliculas = $conn->query($sqlPeliculas) /* ejecutamos la consulta */ /* $conn->
     <script> /* javaScript */
         let editaModal = document.getElementById('editaModal')  /* para acceder a los eventos, vamos a detectar la ventana modal */
         
+/*         editaModal.addEventListener('hide.bs.modal', event => {
+            editaModal.querySelector('.modal-body #nombre').value = ""
+            editaModal.querySelector('.modal-body #descripcion').value = ""
+            editaModal.querySelector('.modal-body #genero').value = ""
+            editaModal.querySelector('.modal-body #img_poster').value = ""
+            editaModal.querySelector('.modal-body #poster').value = ""
+        }) */
+
         editaModal.addEventListener('shown.bs.modal', event => { /* le indicamos el evento, se llama shown, se dispara alcargar toda la visualizacion del modal */
             let button = event.relatedTarget /* necesitamos saber a que icono se le dio click */
             let id = button.getAttribute('data-bs-id') /* ya con el boton detectado llamo al atributo data-bs-id que ya lo defini en la tabla*/
@@ -104,12 +112,10 @@ $peliculas = $conn->query($sqlPeliculas) /* ejecutamos la consulta */ /* $conn->
                 body: formData /* enviamos la informacion */
             }).then(response => response.json()) /* el response sea un .json */
             .then(data => { /* lo q nos arroje este en una variable que se llame "data" */
-
                 inputId.value = data.id /* los datos de mi registro van a tener cada unos de estos registros */
                 inputNombre.value = data.nombre
                 inputDescripcion.value = data.descripcion
                 inputGenero.value = data.id_genero
-
                 }).catch(err => console.log(err)) /* manejamos los errores */
         }
 
