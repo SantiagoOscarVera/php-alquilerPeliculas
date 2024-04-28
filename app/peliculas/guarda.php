@@ -15,6 +15,20 @@ if($conn->query($sql)){ /* en caso de que si se ejecute la conexion a sql */
         $permitidos = array("image/jpg","image/jpeg"); /* validamos el formato de la imagen */
         if(in_array($_FILES['poster']['type'], $permitidos)) { /* indicamos lo que vamos a validar y nos trae el tipo la extension etc- tambien le indicamos a donde vamos a buscar osea en "$permitidos"*/
             
+            $dir = "posters"; /* guardamos todo en la carpeta posters */
+
+            $info_img = pathinfo($_FILES['poster']['name']);
+            $info_img['extension'];
+
+            $poster = $dir . '/' . $id . '.jpg';
+
+            if(!file_exists($dir)){
+                mkdir($dir, 0777);
+            }
+
+            if(!move_uploaded_file($_FILES['poster']['tmp_name'], $poster)){
+                
+            }
 
         }
     }
