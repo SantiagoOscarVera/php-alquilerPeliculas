@@ -103,14 +103,25 @@ $dir = 'posters/'
     <script> /* javaScript */
         let editaModal = document.getElementById('editaModal')  /* para acceder a los eventos, vamos a detectar la ventana modal */
         let eliminaModal = document.getElementById('eliminaModal')  /* para acceder a los eventos, vamos a detectar la ventana modal */
+
+        nuevoModal.addEventListener('shown.bs.modal', event =>{ /* esto es que para al abrir al crear, se enfoque en el nombre */
+            nuevoModal.querySelector('.modal-body #nombre').focus()
+        })
+
+        nuevoModal.addEventListener('hide.bs.modal', event => { /* esto se hace para que al abrir el modal para crear, los espacios aparezcan en blanco */
+            nuevoModal.querySelector('.modal-body #nombre').value = ""
+            nuevoModal.querySelector('.modal-body #descripcion').value = ""
+            nuevoModal.querySelector('.modal-body #genero').value = ""
+            nuevoModal.querySelector('.modal-body #poster').value = ""
+        })
         
-/*         editaModal.addEventListener('hide.bs.modal', event => {
+        editaModal.addEventListener('hide.bs.modal', event => { /* esto se hace para que al abrir el modal para editar, los espacios aparezcan en blanco */
             editaModal.querySelector('.modal-body #nombre').value = ""
             editaModal.querySelector('.modal-body #descripcion').value = ""
             editaModal.querySelector('.modal-body #genero').value = ""
             editaModal.querySelector('.modal-body #img_poster').value = ""
             editaModal.querySelector('.modal-body #poster').value = ""
-        }) */
+        })
 
         editaModal.addEventListener('shown.bs.modal', event => { /* le indicamos el evento, se llama shown, se dispara alcargar toda la visualizacion del modal */
             let button = event.relatedTarget /* necesitamos saber a que icono se le dio click */

@@ -13,8 +13,8 @@ VALUES ('$nombre', '$descripcion', $genero, NOW())"; /* NOW nos trae la hora y f
 if($conn->query($sql)){ /* en caso de que si se ejecute la conexion a sql */
     $id = $conn->insert_id; /* obtenemos o creamos el id con la conexion y la funcion insert id  */
 
-    $_SESSION['color'] .= "Success";
-    $_SESSION['msg'] .= "Formato de imágen no permitido";
+    $_SESSION['color'] = "success";
+    $_SESSION['msg'] = "Registro guardado";
 
 
     if($_FILES['poster']['error'] == UPLOAD_ERR_OK) { /* verificamos que no haya error o que la imagen este vacia. $_FILES es una variable global. ['poster']['error'] son dos infices.  UPLOAD_ERR_OK es lo mismo que poner cero significa que no tenga ningun error   */
@@ -33,16 +33,16 @@ if($conn->query($sql)){ /* en caso de que si se ejecute la conexion a sql */
             }
 
             if(!move_uploaded_file($_FILES['poster']['tmp_name'], $poster)){ /* movemos nuestro archivo.  ['tmp_name'] con esto lo guardamos en archivos temporales para poder identificarlo, y con "$poster" le damos el nuevo nombre y ubicacion en el que se va a encontrar. Esto te da un verdadero o falso*/
-                $_SESSION['color'] .= "Danger";
+                $_SESSION['color'] = "danger";
                 $_SESSION['msg'] .= "<br> Error al guardar imagen"; /* .= con esto se concatena para que no se solapen los mensajes */
+                }
             } else {
-                $_SESSION['color'] .= "Danger";
+                $_SESSION['color'] = "danger";
                 $_SESSION['msg'] .= "<br> Formato de imagen no permitido";
             }
-        }
     }
 } else { /* si tenemos un error o no se guarde */
-    $_SESSION['color'] .= "Danger";
+    $_SESSION['color'] = "danger";
     $_SESSION['msg'] = "Error al guardar imagen"; /* aca no necesitamos concatenar */
 
 }
