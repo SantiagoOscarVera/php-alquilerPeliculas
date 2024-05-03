@@ -13,8 +13,7 @@ VALUES ('$nombre', '$descripcion', $genero, NOW())"; /* NOW nos trae la hora y f
 if($conn->query($sql)){ /* en caso de que si se ejecute la conexion a sql */
     $id = $conn->insert_id; /* obtenemos o creamos el id con la conexion y la funcion insert id  */
 
-    $_SESSION['color'] .= "Succes";
-
+    $_SESSION['color'] .= "Success";
     $_SESSION['msg'] .= "Formato de imágen no permitido";
 
 
