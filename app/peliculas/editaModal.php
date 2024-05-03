@@ -30,6 +30,10 @@
             </div>
 
             <div class="mb-3">
+              <img id="img_poster" alt="imagen del poster" width="100">
+            </div>
+  
+            <div class="mb-3">
                 <label for="poster" class="form-label">Poster:</label>
                 <input type="file" name="poster" id="poster" class="form-control" >
             </div>

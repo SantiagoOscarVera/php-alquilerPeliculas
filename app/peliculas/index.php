@@ -32,14 +32,15 @@ $dir = 'posters/'
         <h2 class="text-center">Peliculas</h2>
 
         <hr>
-        <?php if(isset($_SESSION['msg'])) { ?> <!-- si tenemos la variable session con el mensaje msg.. -->
+        <?php if(isset($_SESSION['msg']) && isset($_SESSION['color'])) { ?> <!-- si tenemos la variable session con el mensaje msg.. -->
 
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <div class="alert alert-<?= $_SESSION['color'] ?> alert-dismissible fade show" role="alert">
                 <?= $_SESSION['msg'] ?> <!-- para que salga el mensaje -->
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
 
         <?php 
+        unset($_SESSION['color']); /* para que no se repita el mensaje */
         unset($_SESSION['msg']); /* para que no se repita el mensaje */
         } ?>
 
@@ -121,6 +122,8 @@ $dir = 'posters/'
             let inputNombre = editaModal.querySelector('.modal-body #nombre')
             let inputDescripcion = editaModal.querySelector('.modal-body #descripcion')
             let inputGenero = editaModal.querySelector('.modal-body #genero')
+            let poster = editaModal.querySelector('.modal-body #img_poster')
+
 
             /* hacemos una consulta a la base de datos con AJAX, para que me retorne la info que quiero solicitar*/
 
@@ -137,6 +140,8 @@ $dir = 'posters/'
                 inputNombre.value = data.nombre
                 inputDescripcion.value = data.descripcion
                 inputGenero.value = data.id_genero
+                poster.src = '<?= $dir ?>' + data.id + '.jpg' /* hacemos esto para que aparezca la imagen en el modal para editar el poster */
+
                 }).catch(err => console.log(err)) /* manejamos los errores */
         }
 
