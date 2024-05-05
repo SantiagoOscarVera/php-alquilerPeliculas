@@ -9,7 +9,7 @@
       <div class="modal-body">
         <form action="actualiza.php" method="post" enctype="multipart/form-data">
 
-            <input type="hidden" id="id" name="id"> <!-- hidden significa que no tiene ningun valor,  para poder editar, va hacia el query selector del index -->
+            <input type="hidden" id="id" name="id"> 
 
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre:</label>
